@@ -18,4 +18,5 @@ async def callback(client, query_callback):
     else:
         direct_link, file_size, file_name = await terabox("https://teraboxapp.com/s/"+id)
         name= await download(query_callback.message,direct_link,id,file_size,file_name)
-        await Client.send_video(chat_id=chat_id,video=name,caption=f"**{file_name}**\nJoin @yssprojects",progress=upload,progress_args=(filters.regex("pyrogram"),file_name,id))
+        await Client.send_video(chat_id=chat_id,video=name,supports_streaming=True,caption=f"**{file_name}**\nJoin @yssprojects",progress=upload,progress_args=(query_callback.message,file_name,id))
+        os.remove(name)
